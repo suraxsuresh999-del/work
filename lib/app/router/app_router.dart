@@ -7,6 +7,7 @@ import '../../presentation/auth/screens/onboarding_screen.dart';
 import '../../presentation/auth/screens/login_screen.dart';
 import '../../presentation/auth/screens/register_screen.dart';
 import '../../presentation/auth/screens/forgot_password_screen.dart';
+import '../../presentation/auth/screens/password_security_screen.dart';
 import '../../presentation/auth/screens/email_verification_screen.dart';
 import '../../presentation/auth/screens/user_type_selection_screen.dart';
 import '../../presentation/auth/screens/client_profile_setup_screen.dart';
@@ -18,14 +19,18 @@ import '../../presentation/home/screens/messages_screen.dart';
 import '../../presentation/home/screens/profile_screen.dart';
 import '../../presentation/settings/screens/settings_screen.dart';
 import '../../presentation/freelancer/screens/edit_profile_screen.dart';
+import '../../presentation/freelancer/screens/freelancer_profile_screen.dart';
 import '../../presentation/freelancer/screens/portfolio_screen.dart';
 import '../../presentation/freelancer/screens/verification_screen.dart';
 import '../../presentation/client/screens/post_job_screen.dart';
+import '../../presentation/client/screens/my_jobs_screen.dart';
+import '../../presentation/client/screens/freelancer_discovery_screen.dart';
 import '../../presentation/jobs/screens/job_detail_screen.dart';
 import '../../presentation/chat/screens/chat_room_screen.dart';
 import '../../presentation/payments/screens/wallet_screen.dart';
 import '../../presentation/payments/screens/payment_methods_screen.dart';
 import '../../presentation/search/screens/search_screen.dart';
+import '../../presentation/notifications/screens/notifications_screen.dart';
 import '../../presentation/common/widgets/ws_animated_page.dart';
 import '../../presentation/admin/screens/admin_dashboard_screen.dart';
 import '../../presentation/admin/screens/admin_verification_screen.dart';
@@ -85,6 +90,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const WsAnimatedPage(child: ForgotPasswordScreen()),
       ),
       GoRoute(
+        path: RouteNames.passwordSecurity,
+        name: 'password-security',
+        builder: (context, state) => const WsAnimatedPage(child: PasswordSecurityScreen()),
+      ),
+      GoRoute(
         path: RouteNames.emailVerification,
         name: 'email-verification',
         builder: (context, state) {
@@ -141,12 +151,34 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const WsAnimatedPage(child: PostJobScreen()),
       ),
       GoRoute(
+        path: RouteNames.notifications,
+        name: 'notifications',
+        builder: (context, state) => const WsAnimatedPage(child: NotificationsScreen()),
+      ),
+      GoRoute(
+        path: RouteNames.myPostedJobs,
+        name: 'my-posted-jobs',
+        builder: (context, state) => const WsAnimatedPage(child: MyJobsScreen()),
+      ),
+      GoRoute(
+        path: RouteNames.freelancerDiscovery,
+        name: 'freelancer-discovery',
+        builder: (context, state) => const WsAnimatedPage(child: FreelancerDiscoveryScreen()),
+      ),
+      GoRoute(
         path: RouteNames.jobDetail,
         name: 'job-detail',
         builder: (context, state) {
           final id = state.pathParameters['id'] ?? '';
           return WsAnimatedPage(child: JobDetailScreen(jobId: id));
         },
+      ),
+      GoRoute(
+        path: RouteNames.freelancerProfile,
+        name: 'freelancer-profile',
+        builder: (context, state) => WsAnimatedPage(
+          child: FreelancerProfileScreen(freelancerId: state.pathParameters['id'] ?? ''),
+        ),
       ),
       GoRoute(
         path: RouteNames.chatRoom,
